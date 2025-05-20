@@ -66,7 +66,12 @@
     <string name="mcl_setting_title_renderer_subtitle">Renderer specific settings</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (all versions, fast)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (all versions, mid)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">UMP Zink (Vulkan) - (all versions, mid)</string>
+    <string name="mcl_setting_renderer_angle">[NOT IMPLEMENTED] ANGLE (Vulkan) - (1.17+ only, fast)</string>
+    <string name="mcl_setting_renderer_panfrost">[NOT IMPLEMENTED] Panfrost (64bit, Mali Gx10 only) - (all versions, mid)</string>
+    <string name="mcl_setting_renderer_freedreno">Freedreno (Adreno 5xx and 6xx only) - (all versions, mid)</string>
+    <string name="mcl_setting_renderer_vulkan_zink_standard">[NOT IMPLEMENTED] Zink (Vulkan) - (all versions, mid)</string>
+    <string name="mcl_setting_renderer_vulkan_zink_legacy">[NOT IMPLEMENTED] Legacy Zink (Vulkan) - (all versions, slow)</string>
     <string name="mcl_setting_renderer_mobileglues">MobileGlues (OpenGL ES) - (1.17+ only, fast)</string>
     <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - 1.17+ only</string>
     <string name="mcl_setting_veroption_release">Release</string>

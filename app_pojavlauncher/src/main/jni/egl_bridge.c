@@ -169,7 +169,17 @@ int pojavInitOpenGL() {
     } else if (strcmp(renderer, "vulkan_zink") == 0) {
         pojav_environ->config_renderer = RENDERER_VK_ZINK;
         load_vulkan();
-        setenv("GALLIUM_DRIVER","zink",1);
+        setenv("GALLIUM_DRIVER", "zink", 1);
+        set_osm_bridge_tbl();
+    } else if (strcmp(renderer, "adrhw_freedreno") == 0) {
+        pojav_environ->config_renderer = RENDERER_VK_ZINK;
+        setenv("GALLIUM_DRIVER", "freedreno", 1);
+        setenv("MESA_LOADER_DRIVER_OVERRIDE", "kgsl", 1);
+        set_osm_bridge_tbl();
+    } else if (strcmp(renderer, "malihw_panfrost") == 0) {
+        pojav_environ->config_renderer = RENDERER_VK_ZINK;
+        setenv("GALLIUM_DRIVER", "panfrost", 1);
+        setenv("PAN_DEBUG","gofaster",1);
         set_osm_bridge_tbl();
     } else printf("EGLBridge: Renderer was not configured as a bridge. Consider adding \"opengles\" to the start of renderer name if it crashes");
     if(br_init()) {

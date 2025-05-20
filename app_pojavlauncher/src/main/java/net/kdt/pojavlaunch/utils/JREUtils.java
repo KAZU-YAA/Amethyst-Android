@@ -471,6 +471,7 @@ public class JREUtils {
             case "opengles2_5":
             case "opengles3":
                 renderLibrary = "libgl4es_114.so"; break;
+            case "adrhw_freedreno":
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
             case "opengles_mobileglues": renderLibrary = "libmobileglues.so"; break;
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
