@@ -12,7 +12,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Вибрати інсталятор моду</string>
     <!-- Error messages -->
-    <string name="error_fatal">Amethyst був зупинений у результаті збою</string>
+    <string name="error_fatal">SolCraftLauncher був зупинений у результаті збою</string>
     <string name="error_no_version">Немає версії!</string>
     <string name="error_show_more">Розвернути</string>
     <string name="error_show_less">Звернути</string>

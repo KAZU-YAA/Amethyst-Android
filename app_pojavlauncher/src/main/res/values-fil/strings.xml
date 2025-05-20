@@ -12,7 +12,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Pumili ng mod installer</string>
     <!-- Error messages -->
-    <string name="error_fatal">Ang Amethyst ay hindi inaasahang nag-crash</string>
+    <string name="error_fatal">Ang SolCraftLauncher ay hindi inaasahang nag-crash</string>
     <string name="error_no_version">Walang bersyon!</string>
     <string name="error_show_more">Magpakita ng higit pa</string>
     <string name="error_show_less">Magpakita ng kaunti</string>

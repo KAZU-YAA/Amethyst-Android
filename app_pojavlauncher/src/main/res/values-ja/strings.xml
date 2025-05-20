@@ -12,7 +12,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Mod インストーラーを選択</string>
     <!-- Error messages -->
-    <string name="error_fatal">Amethyst が異常終了しました</string>
+    <string name="error_fatal">SolCraftLauncher が異常終了しました</string>
     <string name="error_no_version">バージョンがありません</string>
     <string name="error_show_more">詳細を表示</string>
     <string name="error_show_less">詳細を閉じる</string>
