@@ -112,7 +112,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "org.angelauramc.amethyst"
+        applicationId "dev.solcraft.solcraftlauncher"
         minSdkVersion 21
         targetSdkVersion 34
         versionCode getDateSeconds()
@@ -128,9 +128,9 @@ android {
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.customDebug
-            resValue 'string', 'application_package', 'org.angelauramc.amethyst.debug'
-            resValue 'string', 'storageProviderAuthorities', 'org.angelauramc.amethyst.scoped.gamefolder.debug'
-            resValue 'string', 'shareProviderAuthority', 'org.angelauramc.amethyst.scoped.controlfolder.debug'
+            resValue 'string', 'application_package', 'dev.solcraft.solcraftlauncher.debug'
+            resValue 'string', 'storageProviderAuthorities', 'dev.solcraft.solcraftlauncher.scoped.gamefolder.debug'
+            resValue 'string', 'shareProviderAuthority', 'dev.solcraft.solcraftlauncher.scoped.controlfolder.debug'
         }
         proguard {
             initWith debug
@@ -149,8 +149,8 @@ android {
             // defaultConfig already set
             // multiDexEnabled = true
             // debuggable = true
-            resValue 'string', 'storageProviderAuthorities', 'org.angelauramc.amethyst.scoped.gamefolder'
-            resValue 'string', 'application_package', 'org.angelauramc.amethyst'
+            resValue 'string', 'storageProviderAuthorities', 'dev.solcraft.solcraftlauncher.scoped.gamefolder'
+            resValue 'string', 'application_package', 'dev.solcraft.solcraftlauncher'
         }
         gplay {
             initWith release
