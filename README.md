@@ -1,3 +1,15 @@
+<H1 align="center">SolCraftLauncher</H1>
+
+<img src="https://github.com/SolDev69/SolCraftLauncher/blob/v3_sol/app_pojavlauncher/src/main/assets/solcraftlauncher.png" align="left" width="130" height="150" alt="SolCraftLauncher logo">
+
+[![Android CI](https://github.com/SolDev69/SolCraftLauncher/workflows/Android%20CI/badge.svg)](https://github.com/SolDev69/SolCraftLauncher/actions)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/SolDev69/SolCraftLauncher)](https://github.com/SolDev69/SolCraftLauncher/actions)
+[![Discord](https://img.shields.io/discord/1199157907523117066.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.com/invite/qeVjdcU4CJ)
+---------
+SolCraftLauncher is a fork of PojavLauncher/Angel Aura Amethyst with more technical added features, new renderers, and some QOL improvements.
+
+
+
 <h1 align="center">Angel Aura Amethyst</h1>
 
 <img src="https://github.com/AngelAuraMC/Amethyst-Android/blob/v3_openjdk/app_pojavlauncher/src/main/assets/amethyst.png" align="left" width="130" height="130" alt="Amethyst logo">
