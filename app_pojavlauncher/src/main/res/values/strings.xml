@@ -433,7 +433,6 @@
     <string name="bta_installer_untested_versions">Untested BTA versions</string>
     <string name="bta_installer_nightly_versions">Nightly BTA versions</string>
     <string name="newdl_extracting_native_libraries">Extracting native libraries (%d/%d)</string>
-    <string name="toast_not_available_demo">This is not available in demo mode</string>
 
     <string name="preference_renderer_mobileglues_settings">MobileGlues Renderer Settings</string>
     <string name="mg_renderer_glsl_cache">Max GLSL cache size</string>
