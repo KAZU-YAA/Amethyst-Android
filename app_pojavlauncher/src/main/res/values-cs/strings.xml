@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition pro Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -15,7 +13,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Vyberte instalátor módů</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher neočekávaně spadl</string>
+    <string name="error_fatal">Amethyst neočekávaně spadl</string>
     <string name="error_no_version">Žádná verze!</string>
     <string name="error_show_more">Zobrazit více</string>
     <string name="error_show_less">Zobrazit méně</string>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">pajaw launcher (Mc4Android)</string>
-    <string name="app_short_name">Punjabi launcher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -13,7 +11,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Chooz mod installr</string>
     <!-- Error messages -->
-    <string name="error_fatal">Pojaw Launcher haz unexpectadly crashd</string>
+    <string name="error_fatal">Amethyst haz unexpectadly crashd</string>
     <string name="error_no_version">No vershun!</string>
     <string name="error_show_more">Show mor</string>
     <string name="error_show_less">Show les</string>

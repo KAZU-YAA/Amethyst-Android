@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition Android üçün)</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -13,7 +12,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Mod quraşdırıcısını seçin</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher gözlənilmədən çökdü</string>
+    <string name="error_fatal">Amethyst gözlənilmədən çökdü</string>
     <string name="error_no_version">Versiya yoxdur!</string>
     <string name="error_show_more">Daha çox göstər</string>
     <string name="error_show_less">Daha az göstər</string>

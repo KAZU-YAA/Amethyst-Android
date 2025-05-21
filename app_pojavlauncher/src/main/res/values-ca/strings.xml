@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition per Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -13,7 +11,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Selecciona un mod per afegir</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher s’ha parat inesperadament</string>
+    <string name="error_fatal">Amethyst s’ha parat inesperadament</string>
     <string name="error_no_version">Cap versio!</string>
     <string name="error_show_more">Mostra més</string>
     <string name="error_show_less">Mostrar menys</string>

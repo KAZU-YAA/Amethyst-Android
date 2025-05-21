@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -15,7 +13,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Выберите установщик мода</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher был остановлен в результате сбоя</string>
+    <string name="error_fatal">Amethyst был остановлен в результате сбоя</string>
     <string name="error_no_version">Нет версий!</string>
     <string name="error_show_more">Развернуть</string>
     <string name="error_show_less">Свернуть</string>

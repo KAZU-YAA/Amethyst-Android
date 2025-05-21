@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition Android-hoz)</string>
-    <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -13,7 +11,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Select a mod installer</string>
     <!-- Error messages -->
-    <string name="error_fatal">A pojavlauncher váratlanul kicrashelt</string>
+    <string name="error_fatal">A Amethyst váratlanul kicrashelt</string>
     <string name="error_no_version">Nincs verzió!</string>
     <string name="error_show_more">Mutass többet</string>
     <string name="error_show_less">Mutass kevesebbet</string>

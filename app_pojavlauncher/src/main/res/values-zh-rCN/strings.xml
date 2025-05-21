@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">PojavLauncher（适用于 Android 的《Minecraft：Java版》）</string>
-    <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -15,7 +13,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">选择模组安装器</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher 意外崩溃</string>
+    <string name="error_fatal">Amethyst 意外崩溃</string>
     <string name="error_no_version">无版本！</string>
     <string name="error_show_more">显示详情</string>
     <string name="error_show_less">隐藏细节</string>

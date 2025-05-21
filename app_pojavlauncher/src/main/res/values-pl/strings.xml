@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition dla Androida)</string>
-    <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -15,7 +13,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Wybierz instalator modyfikacji</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher uległ nieoczekiwanej awarii</string>
+    <string name="error_fatal">Amethyst uległ nieoczekiwanej awarii</string>
     <string name="error_no_version">Brak wersji!</string>
     <string name="error_show_more">Pokaż więcej</string>
     <string name="error_show_less">Pokaż mniej</string>

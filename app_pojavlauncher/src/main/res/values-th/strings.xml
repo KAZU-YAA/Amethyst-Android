@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: รุ่น Java สำหรับ Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -14,7 +12,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">เลือกตัวติดตั้งม็อด</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher ได้ขัดข้องโดยไม่คาดคิด</string>
+    <string name="error_fatal">Amethyst ได้ขัดข้องโดยไม่คาดคิด</string>
     <string name="error_no_version">ไม่มีเวอร์ชัน!</string>
     <string name="error_show_more">แสดงเพิ่มเติม</string>
     <string name="error_show_less">แสดงน้อยลง</string>
