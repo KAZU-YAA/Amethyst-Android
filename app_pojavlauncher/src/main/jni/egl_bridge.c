@@ -166,7 +166,8 @@ int pojavInitOpenGL() {
     if (strncmp("opengles", renderer, 8) == 0) {
         pojav_environ->config_renderer = RENDERER_GL4ES;
         set_gl_bridge_tbl();
-    } else if (strcmp(renderer, "vulkan_zink") == 0) {
+    } else if (strcmp(renderer, "vulkan_zink") == 0 || strcmp(renderer, "vulkan_zink_standard") == 0 ||
+            strcmp(renderer, "vulkan_zink_legacy") == 0) {
         pojav_environ->config_renderer = RENDERER_VK_ZINK;
         load_vulkan();
         setenv("GALLIUM_DRIVER", "zink", 1);
