@@ -48,9 +48,9 @@ For more details, check out our [wiki](https://angelauramc.dev/wiki)!
 * Modding via Forge and Fabric are also supported.
 * This repository contains source code for Android. For iOS/iPadOS, check out [Amethyst-iOS](https://github.com/AngelAuraMC/Amethyst-iOS).
 
-## Getting PojavLauncher
+## Getting Amethyst
 
-You can get PojavLauncher via two methods:
+You can get Amethyst via two methods:
 
 1. **Releases:** Download the prebuilt app from our [stable releases](https://github.com/AngelAuraMC/Amethyst-Android/releases) or [automatic builds](https://github.com/AngelAuraMC/Amethyst-Android/actions).
 2. **Build from Source:** Follow the [building instructions](#building) below.
