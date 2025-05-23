@@ -5,7 +5,7 @@
 [![Android CI](https://github.com/SolDev69/SolCraftLauncher/workflows/Android%20CI/badge.svg)](https://github.com/SolDev69/SolCraftLauncher/actions)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/SolDev69/SolCraftLauncher)](https://github.com/SolDev69/SolCraftLauncher/actions)
 [![Discord](https://img.shields.io/discord/1199157907523117066.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.com/invite/qeVjdcU4CJ)
----------
+
 SolCraftLauncher is a fork of PojavLauncher/Angel Aura Amethyst with more technical added features, new renderers, and some QOL improvements.
 
 
