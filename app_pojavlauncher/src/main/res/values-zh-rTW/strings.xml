@@ -13,7 +13,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">選擇模組安裝程式</string>
     <!-- Error messages -->
-    <string name="error_fatal">Amethyst 非預期的崩潰</string>
+    <string name="error_fatal">SolCraftLauncher 非預期的崩潰</string>
     <string name="error_no_version">沒有版本！</string>
     <string name="error_show_more">顯示更多</string>
     <string name="error_show_less">顯示較少</string>

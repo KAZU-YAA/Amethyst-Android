@@ -11,7 +11,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Selecteer een mod installatie</string>
     <!-- Error messages -->
-    <string name="error_fatal">Amethyst is onverwacht gecrasht</string>
+    <string name="error_fatal">SolCraftLauncher is onverwacht gecrasht</string>
     <string name="error_no_version">Geen versie!</string>
     <string name="error_show_more">Meer weergeven</string>
     <string name="error_show_less">Minder weergeven</string>

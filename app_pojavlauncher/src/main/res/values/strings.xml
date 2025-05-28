@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">Amethyst</string>
+    <string name="app_name">SolCraftLauncher</string>
 
     <!-- Action bar part -->
 
@@ -21,7 +21,7 @@
     <string name="alerttitle_installmod">Select a mod installer</string>
 
     <!-- Error messages -->
-    <string name="error_fatal">Amethyst has unexpectedly crashed</string>
+    <string name="error_fatal">SolCraftLauncher has unexpectedly crashed</string>
     <string name="error_no_version">No version!</string>
     <string name="error_show_more">Show more</string>
     <string name="error_show_less">Show less</string>
@@ -66,7 +66,11 @@
     <string name="mcl_setting_title_renderer_subtitle">Renderer specific settings</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (all versions, fast)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (all versions, mid)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">UMP Zink (Vulkan) - (all versions, mid)</string>
+    <string name="mcl_setting_renderer_panfrost">Panfrost Legacy (64bit, Mali Gx10 only) - (all versions, mid)</string>
+    <string name="mcl_setting_renderer_freedreno">Freedreno (Adreno 5xx and 6xx only) - (all versions, mid)</string>
+    <string name="mcl_setting_renderer_vulkan_zink_standard">Zink (Vulkan) - (all versions, mid)</string>
+    <string name="mcl_setting_renderer_vulkan_zink_legacy">Legacy Zink (Vulkan) - (all versions, slow)</string>
     <string name="mcl_setting_renderer_mobileglues">MobileGlues (OpenGL ES) - (1.17+ only, fast)</string>
     <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - 1.17+ only</string>
     <string name="mcl_setting_veroption_release">Release</string>
@@ -240,7 +244,7 @@
     <string name="color_default_hex" translatable="false">FFFF0000</string>
     <string name="notif_channel_name">General</string>
     <string name="notif_channel_id" translatable="false">channel_id</string>
-    <string name="lazy_service_default_title">Pojav Foreground Service</string>
+    <string name="lazy_service_default_title">SCL Foreground Service</string>
     <string name="mcl_setting_veroption_installed">Installed</string>
     <string name="use_global_default">(Use global default)</string>
     <string name="default_control">Default controlmap</string>
@@ -423,7 +427,7 @@
     <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">Your GPU is not capable of rendering above 7 render distance without Sodium or other similar mods. The render distance will be automatically reduced when you click "OK".</string>
     <string name="mcl_button_open_directory">Open game directory</string>
-    <string name="discord_invite" translatable="false">https://discord.gg/98pZ8YY3Cq</string>
+    <string name="discord_invite" translatable="false">https://discord.gg/qeVjdcU4CJ</string>
     <string name="local_login_bad_username_title">Unsuitable username</string>
     <string name="local_login_bad_username_text">The username must be between 3–16 characters long, and must only contain latin letters, numbers 0–9 and underscores.</string>
     <string name="quick_setting_title">Quick settings</string>
@@ -443,5 +447,5 @@
     <string name="mg_renderer_title_computeShaderext">Advertise Experimental Compute Shader extension</string>
     <string name="mg_renderer_summary_computeShaderext">May help with shaderpack glitches. Disable if not needed, can cause crashes.</string>
     <string name="mg_renderer_title_errorSetting">Error Filtering</string>
-    <string name="app_short_name">Amethyst</string>
+    <string name="app_short_name">SolCraftLauncher</string>
 </resources>

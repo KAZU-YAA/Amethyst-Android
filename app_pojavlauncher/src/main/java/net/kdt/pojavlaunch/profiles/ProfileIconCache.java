@@ -82,7 +82,7 @@ public class ProfileIconCache {
 
     private static int getStaticIconResource(String icon) {
         switch (icon) {
-            case "default": return R.drawable.ic_pojav_full;
+            case "default": return R.drawable.ic_solcraftlaunch;
             case "fabric": return R.drawable.ic_fabric;
             case "quilt": return R.drawable.ic_quilt;
             default: return -1;

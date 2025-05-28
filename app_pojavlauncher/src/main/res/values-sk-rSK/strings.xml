@@ -11,7 +11,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Vybrať installer módu</string>
     <!-- Error messages -->
-    <string name="error_fatal">Amethyst neočakávane spadol</string>
+    <string name="error_fatal">SolCraftLauncher neočakávane spadol</string>
     <string name="error_no_version">Žiadne verzie!</string>
     <string name="error_show_more">Zobraziť viac</string>
     <string name="error_show_less">Zobraziť menej</string>
@@ -197,7 +197,7 @@
     <string name="arc_capes_title">Cosmetica Capeky</string>
     <string name="arc_capes_desc">Aktivuje capeky (plášte) Cosmetica. Pre info navštívte https://cosmetica.cc. Pre ich funkčnosť je potrebný OptiFine.</string>
     <string name="notif_channel_name">Všeobecné nastavenia notifikácií</string>
-    <string name="lazy_service_default_title">Pojav Foreground Service</string>
+    <string name="lazy_service_default_title">SCL Foreground Service</string>
     <string name="use_global_default">(Použiť predvolené nastavenie)</string>
     <string name="default_control">Predvolené kontrolky</string>
     <string name="progresslayout_tasks_in_progress">Počet prebiehajúcich operácií: %d</string>

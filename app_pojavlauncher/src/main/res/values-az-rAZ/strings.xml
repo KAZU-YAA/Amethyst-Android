@@ -12,7 +12,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Mod quraşdırıcısını seçin</string>
     <!-- Error messages -->
-    <string name="error_fatal">Amethyst gözlənilmədən çökdü</string>
+    <string name="error_fatal">SolCraftLauncher gözlənilmədən çökdü</string>
     <string name="error_no_version">Versiya yoxdur!</string>
     <string name="error_show_more">Daha çox göstər</string>
     <string name="error_show_less">Daha az göstər</string>

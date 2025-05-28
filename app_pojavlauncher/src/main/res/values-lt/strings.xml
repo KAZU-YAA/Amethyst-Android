@@ -11,7 +11,7 @@
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">Pasirinkite modifikacijų įdiegimui</string>
     <!-- Error messages -->
-    <string name="error_fatal">Amethyst netikėtai išsijungė arba užlužo</string>
+    <string name="error_fatal">SolCraftLauncher netikėtai išsijungė arba užlužo</string>
     <string name="error_no_version">Nėra versijos!</string>
     <string name="error_show_more">Rodyti daugiau</string>
     <string name="error_show_less">Rodyti mažiau</string>
