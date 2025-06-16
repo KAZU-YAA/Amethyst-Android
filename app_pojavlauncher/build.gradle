@@ -232,5 +232,5 @@ dependencies {
 
     implementation project(":MobileGlues")
 
-    implementation 'top.fifthlight.touchcontroller:proxy-client-android:0.0.2'
+    implementation 'top.fifthlight.touchcontroller:proxy-client:0.0.2'
 }
