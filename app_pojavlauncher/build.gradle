@@ -231,4 +231,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
     implementation project(":MobileGlues")
+
+    implementation 'top.fifthlight.touchcontroller:proxy-client-android:0.0.2'
 }
