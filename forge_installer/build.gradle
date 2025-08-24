@@ -17,7 +17,7 @@ jar {
     }
     if (gitUsed()){
       File versionFile = file("../app_pojavlauncher/src/main/assets/components/forge_installer/version")
-      versionFile.write(getGitHash(project.name))
+      versionFile.write(getGitHash(project.projectDir))
     }
     manifest {
         attributes("Manifest-Version": "1.0",

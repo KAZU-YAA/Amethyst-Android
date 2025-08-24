@@ -1005,7 +1005,9 @@ public class GLFW
         // These values can be found at headings_array.xml
         switch (System.getenv("POJAV_RENDERER")) {
             case "vulkan_zink":
-                if (System.getenv("POJAV_LOAD_TURNIP").equals("1")) {
+                Boolean turnipLoad = System.getenv("POJAV_LOAD_TURNIP") != null ?
+                    System.getenv("POJAV_LOAD_TURNIP").equals("1") : false;
+                if (turnipLoad) {
                     System.out.println("GLFW: Turnip+Zink detected, setting GL context to 4.6");
                     glMajor = 4;
                     glMinor = 6;

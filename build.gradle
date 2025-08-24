@@ -4,7 +4,7 @@ plugins{
     id 'com.android.library' version '8.7.2' apply false
 }
 
-String getGitHash(String project) {
+String getGitHash(File project) {
     def command = Runtime.getRuntime().exec("git rev-list -1 HEAD " + project + "/src")
     def returnCode = command.waitFor()
     if (returnCode != 0) {
