@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.MainActivity.touchCharInput;
+import static net.kdt.pojavlaunch.Tools.LOCAL_RENDERER;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_MOUSE_GRAB_FORCE;
 import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
@@ -91,6 +92,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
     private AndroidPointerCapture mPointerCapture;
     private boolean mLastGrabState = false;
     public static boolean sdlEnabled = false;
+    boolean useSurfaceView = LauncherPreferences.PREF_USE_ALTERNATE_SURFACE;
 
     public MinecraftGLSurface(Context context) {
         this(context, null);
@@ -118,7 +120,11 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
     public void start(boolean isAlreadyRunning, AbstractTouchpad touchpad){
         if(Tools.isAndroid8OrHigher()) setUpPointerCapture(touchpad);
         mInGUIProcessor.setAbstractTouchpad(touchpad);
-        if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
+        // Kopper Zink has orientation issues on SurfaceView
+        try {
+            useSurfaceView = useSurfaceView && !LOCAL_RENDERER.equals("opengles3_desktopgl_zink_kopper");
+        } catch (NullPointerException ignored){}
+        if(useSurfaceView){
             SurfaceView surfaceView = new SurfaceView(getContext());
             mSurface = surfaceView;
 
@@ -401,7 +407,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
             Log.w("MGLSurface", "Attempt to refresh size on null surface");
             return;
         }
-        if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
+        if(useSurfaceView){
             SurfaceView view = (SurfaceView) mSurface;
             if(view.getHolder() != null){
                 view.getHolder().setFixedSize(windowWidth, windowHeight);
