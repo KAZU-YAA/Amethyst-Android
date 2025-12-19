@@ -114,7 +114,7 @@ For support, please join our [Discord server](https://discord.gg/5ptqkyZxEy).
 
 ## License
 
-PojavLauncher is licensed under [GNU LGPLv3](https://github.com/AngelAuraMC/Amethyst-Android/blob/v3_openjdk/LICENSE).
+Amethyst is licensed under [GNU LGPLv3](https://github.com/AngelAuraMC/Amethyst-Android/blob/v3_openjdk/LICENSE).
 
 ## Credits & Dependencies
 
