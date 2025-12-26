@@ -487,4 +487,17 @@
     <string name="mg_renderer_title_fsr">AMD FSR 1 Upscaling</string>
     <string name="autorendererselectfailed">Auto-renderer select failed, defaulting to HolyGL4ES</string>
     <string name="mcl_setting_renderer_vulkan_kopper_zink">Kopper Zink (Vulkan) - (all versions, mid)</string>
+    <string name="sodium_warning_title">Sodium detected!</string>
+    <string name="sodium_warning_message">It appears you are using sodium, this is unsupported and may lead to graphical issues or crashes. Please remove it and all dependent mods.</string>
+    <string name="delete_sodium">Delete Sodium and Launch</string>
+    <string name="sodium_override_title">Run sodium forcefully</string>
+    <string name="sodium_override_summaryOff">Using sodium may cause visual bugs and crashes. You have been warned.</string>
+    <string name="sodium_override_summaryOn">Sodium is not supported. No help will be given if you encounter any issues.</string>
+    <!--  Make sure the people turning this on can read English.  -->
+    <string name="sodium_math_warning_title" translatable="false">Solve the math question to enable</string>
+    <string name="sodium_math_warning_message" translatable="false">
+        Sodium is unsupported, you are on your own. You have been warned.\n
+        Now what\'s %1$d multiplied by %2$d plus %3$d minus %4$d?
+    </string>
+
 </resources>

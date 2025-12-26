@@ -63,6 +63,7 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.tasks.AsyncAssetManager;
 import net.kdt.pojavlaunch.utils.DateUtils;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
 import net.kdt.pojavlaunch.utils.FileUtils;
@@ -218,7 +219,7 @@ public final class Tools {
      * @param gameDir current game directory
      * @return whether sodium or a sodium-based mod is installed
      */
-    private static boolean hasSodium(File gameDir) {
+    public static boolean hasSodium(File gameDir) {
         File modsDir = new File(gameDir, "mods");
         File[] mods = modsDir.listFiles(file -> file.isFile() && file.getName().endsWith(".jar"));
         if(mods == null) return false;
@@ -349,7 +350,7 @@ public final class Tools {
 
         List<String> javaArgList = new ArrayList<>();
 
-        getCacioJavaArgs(javaArgList, runtime.javaVersion == 8);
+        getCacioJavaArgs(javaArgList, runtime.javaVersion == 8, activity);
 
         if (versionInfo.logging != null) {
             String configFile = Tools.DIR_DATA + "/security/" + versionInfo.logging.client.file.id.replace("client", "log4j-rce-patch");
@@ -533,7 +534,7 @@ public final class Tools {
         }
     }
 
-    public static void getCacioJavaArgs(List<String> javaArgList, boolean isJava8) {
+    public static void getCacioJavaArgs(List<String> javaArgList, boolean isJava8, Activity activity) {
         // Caciocavallo config AWT-enabled version
         javaArgList.add("-Djava.awt.headless=false");
         javaArgList.add("-Dcacio.managed.screensize=" + AWTCanvasView.AWT_CANVAS_WIDTH + "x" + AWTCanvasView.AWT_CANVAS_HEIGHT);
@@ -544,10 +545,20 @@ public final class Tools {
             javaArgList.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
             javaArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
         } else {
+            File caciocavavallo17Dir = new File(Tools.DIR_GAME_HOME, "caciocavallo17");
+            File[] caciocavallo17Jars = caciocavavallo17Dir.listFiles((f, s) ->s.contains("cacio-tta"));
+            if(caciocavallo17Jars == null || caciocavallo17Jars.length < 1) {
+            // We wanna avoid the launch being interrupted so we extract again if it isn't found
+                AsyncAssetManager.unpackComponents(activity);
+                caciocavallo17Jars = caciocavavallo17Dir.listFiles((f, s) ->s.contains("cacio-tta"));
+                if(caciocavallo17Jars == null || caciocavallo17Jars.length < 1)
+                    throw new RuntimeException("Failed to extract required assets!");
+            }
+            javaArgList.add("-javaagent:"+caciocavallo17Jars[0].getAbsolutePath());
             javaArgList.add("-Dawt.toolkit=com.github.caciocavallosilano.cacio.ctc.CTCToolkit");
             javaArgList.add("-Djava.awt.graphicsenv=com.github.caciocavallosilano.cacio.ctc.CTCGraphicsEnvironment");
-            javaArgList.add("-Djava.system.class.loader=com.github.caciocavallosilano.cacio.ctc.CTCPreloadClassLoader");
-
+            // This approach breaks kilt so we use an agent instead
+//          javaArgList.add("-Djava.system.class.loader=com.github.caciocavallosilano.cacio.ctc.CTCPreloadClassLoader");
             javaArgList.add("--add-exports=java.desktop/java.awt=ALL-UNNAMED");
             javaArgList.add("--add-exports=java.desktop/java.awt.peer=ALL-UNNAMED");
             javaArgList.add("--add-exports=java.desktop/sun.awt.image=ALL-UNNAMED");
