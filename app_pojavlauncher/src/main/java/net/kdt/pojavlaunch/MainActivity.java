@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.Tools.dialogForceClose;
+import static net.kdt.pojavlaunch.Tools.hasMods;
 import static net.kdt.pojavlaunch.Tools.runMethodbyReflection;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_ENABLE_GYRO;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
@@ -413,40 +414,28 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                 assetVersion = version.assets;
             }
        } catch (RuntimeException ignored){
-            runOnUiThread(() -> Toast.makeText(this, R.string.autorendererselectfailed, Toast.LENGTH_LONG).show());
             assetVersion = "legacy";
        } // If this fails.. oh well.
+        
         // Autoselect renderer
         if (Tools.LOCAL_RENDERER == null) {
-            // 25w09a is when HolyGL4ES starts showing a black screen upon world load.
-            // There is no way to consistently check for that without breaking mod loaders
-            // for old versions like legacy fabric so we start from 25w07a instead
-
-            // 25w07a assets and assetIndex.id is set to 23, 25w08a and 25w09a is 24.
-
-            // 1.19.3 snapshots and all future versions restarted assets and assetsIndex.id
-            // to 1 and started counting up from there
-
-            // Previous versions had "1.19" and "1.18" and such, with April Fools versions
-            // being even more inconsistent like "3D Shareware v1.34" for the 2019 April Fools
-            // or 1.RV-Pre1 for 2016, thankfully now they don't seem to do that anymore and just
-            // use the incrementing system they now have
-
-            // I could probably read the manifest itself then check which position the `id` field is
-            // and count from there since its ordered latest to oldest but that uses way more code
-            // for basically 3 peoples benefit
-            try {
-                int assetID = Integer.parseInt(assetVersion);
-                // Check if below 25w08a
-                Tools.LOCAL_RENDERER = (assetID <= 23) ? "opengles2" : "opengles_mobileglues";
-                // Then assume 1.19.2 and below
-            } catch (NumberFormatException e) { Tools.LOCAL_RENDERER = "opengles2"; }
+            // Preferably we could detect when it is modded and swap to zink however that would also
+            // cover optifine and vanilla+ configurations which are relatively common, degrading their
+            // experience for no reason. We will compromise with just having users do it themselves.
+            Tools.LOCAL_RENDERER = "opengles2";
+            // MobileGlues becomes available post 1.17. It has superior compatibility with mods
+            // while having fairly similar performance performance compared to GL4ES-based forks.
+            if(assetVersion.matches("\\d+") || // Should match all digits, which is the modern assetVersioning
+               "1.17".equals(assetVersion) ||
+               "1.18".equals(assetVersion) ||
+               "1.19".equals(assetVersion)) Tools.LOCAL_RENDERER = "opengles_mobileglues";
         }
         if(!Tools.checkRendererCompatible(this, Tools.LOCAL_RENDERER)) {
             Tools.RenderersList renderersList = Tools.getCompatibleRenderers(this);
             String firstCompatibleRenderer = renderersList.rendererIds.get(0);
             Log.w("runCraft","Incompatible renderer "+Tools.LOCAL_RENDERER+ " will be replaced with "+firstCompatibleRenderer);
             Tools.LOCAL_RENDERER = firstCompatibleRenderer;
+            runOnUiThread(() -> Toast.makeText(this, R.string.autorendererselectfailed, Toast.LENGTH_LONG).show());
             Tools.releaseRenderersCache();
         }
 
@@ -460,6 +449,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         } catch (NumberFormatException e) { folder.mkdir(); }
 
         MinecraftAccount minecraftAccount = PojavProfile.getCurrentProfileContent(this, null);
+        if (hasMods("sodium"))
+            Logger.appendToLog("WARNING: Sodium is being used, Amethyst-Android does NOT support this mod, you are on your own");
         Logger.appendToLog("--------- Starting game with Launcher Debug!");
         Tools.printLauncherInfo(versionId, Tools.isValidString(minecraftProfile.javaArgs) ? minecraftProfile.javaArgs : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         if(Tools.LOCAL_RENDERER.equals("opengles_mobileglues")) {

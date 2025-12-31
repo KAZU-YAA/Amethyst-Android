@@ -225,6 +225,7 @@ public class JREUtils {
             }
             if (LOCAL_RENDERER.equals("opengles3_desktopgl_zink_kopper")){
                 envMap.put("POJAVEXEC_EGL","libEGL_mesa.so"); // Use Mesa EGL
+                if (Tools.shouldUseUBWC()) envMap.put("FD_DEV_FEATURES", "enable_tp_ubwc_flag_hint=1"); // Turnip fix for OneUI rendering issues
             }
             if (LOCAL_RENDERER.toLowerCase().contains("zink")){
                 // This is sketch but it fixes a lot of things, if it causes problems we can just undo it.

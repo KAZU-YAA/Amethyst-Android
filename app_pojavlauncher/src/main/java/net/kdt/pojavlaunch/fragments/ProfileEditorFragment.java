@@ -246,7 +246,9 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
         mTempProfile.lastVersionId = mDefaultVersion.getText().toString();
         mTempProfile.controlFile = mDefaultControl.getText().toString();
         mTempProfile.name = mDefaultName.getText().toString();
-        mTempProfile.javaArgs = mDefaultJvmArgument.getText().toString();
+        mTempProfile.javaArgs = mDefaultJvmArgument.getText().toString()
+                .replaceAll("[\r\n]+", " ")
+                .trim();
         mTempProfile.gameDir = mDefaultPath.getText().toString();
 
         if(mTempProfile.controlFile.isEmpty()) mTempProfile.controlFile = null;

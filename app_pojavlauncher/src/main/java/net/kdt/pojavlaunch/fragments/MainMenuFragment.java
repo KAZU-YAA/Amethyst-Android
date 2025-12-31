@@ -4,13 +4,12 @@ import static net.kdt.pojavlaunch.Tools.dialogOnUiThread;
 import static net.kdt.pojavlaunch.Tools.hasNoOnlineProfileDialog;
 import static net.kdt.pojavlaunch.Tools.hasOnlineProfile;
 import static net.kdt.pojavlaunch.Tools.openPath;
+import static net.kdt.pojavlaunch.Tools.runOnUiThread;
 import static net.kdt.pojavlaunch.Tools.shareLog;
 
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -24,14 +23,12 @@ import androidx.fragment.app.Fragment;
 import com.kdt.mcgui.mcVersionSpinner;
 
 import net.kdt.pojavlaunch.CustomControlsActivity;
-import net.kdt.pojavlaunch.PojavProfile;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
-import net.kdt.pojavlaunch.value.MinecraftAccount;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
@@ -72,11 +69,16 @@ public class MainMenuFragment extends Fragment {
         mEditProfileButton.setOnClickListener(v -> mVersionSpinner.openProfileEditor(requireActivity()));
 
         mPlayButton.setOnClickListener(v -> {
-            MinecraftProfile minecraftProfile = LauncherProfiles.getCurrentProfile();
-            File gameDir = Tools.getGameDirPath(minecraftProfile);
-            if (Tools.hasSodium(gameDir) && !(LauncherPreferences.DEFAULT_PREF.getBoolean("sodium_override", false))) {
-                Tools.dialogOnUiThread(requireActivity(),
-                        R.string.sodium_warning_title, R.string.sodium_warning_message);
+            if (Tools.hasMods("sodium") && !(LauncherPreferences.DEFAULT_PREF.getBoolean("sodium_override", false))) {
+                AlertDialog sodiumWarningDialog = new AlertDialog.Builder(requireContext())
+                        .setTitle(R.string.sodium_warning_title)
+                        .setMessage(R.string.sodium_warning_message)
+                        .setNeutralButton(R.string.delete_sodium, (d,w)-> {
+                            Tools.deleteSodiumMods();
+                            ExtraCore.setValue(ExtraConstants.LAUNCH_GAME, true);
+                        })
+                        .create();
+                sodiumWarningDialog.show();
             } else ExtraCore.setValue(ExtraConstants.LAUNCH_GAME, true);
 
 
