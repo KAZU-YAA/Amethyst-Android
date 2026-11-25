@@ -86,10 +86,10 @@ android {
             keyPassword "android"
         }
         customRelease {
-            storeFile file("aamc_upload.jks")
-            storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
-            keyAlias System.getenv("ANDROID_KEY_ALIAS")
-            keyPassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+            storeFile file("debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
         }
         googlePlayBuild {
             storeFile file("upload.jks")
