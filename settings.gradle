@@ -14,6 +14,15 @@ dependencyResolutionManagement {
     }
 }
 
+signingConfigs {
+    create("release") {
+        storeFile = file("aamc_upload.jks")
+        storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
+        keyAlias = System.getenv("ANDROID_KEY_ALIAS")
+        keyPassword = System.getenv("ANDROID_KEY_PASSWORD")
+    }
+}
+
 rootProject.name='Amethyst'
 include ':jre_lwjgl3glfw'
 include ":jre_lwjgl3glfw:lwjgl-3.3.3"
