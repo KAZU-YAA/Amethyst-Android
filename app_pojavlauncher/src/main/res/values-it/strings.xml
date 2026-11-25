@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">Amethyst</string>
+    <string name="app_name">Amethyst Microsoft-less Edition</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -58,8 +58,6 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Vecchie-beta</string>
-    <string name="mcl_setting_java_sandbox">Esecuzione di .bar in Sandbox</string>
-    <string name="mcl_setting_java_sandbox_subtitle">Controlla la disponibilità del gestore di sicurezza di sandbox quando esegui un file .jar.</string>
     <string name="mcl_version_clone">Clona</string>
     <!-- Global strings -->
     <string name="global_edit">Modifica</string>
@@ -345,7 +343,6 @@ se vuoi scaricare dalla sorgente ufficiale premi \"Passa al sito ufficiale"\ e r
     <string name="log_view_button_output_on">Output\nON</string>
     <string name="log_view_label_log_output">Registro log:</string>
     <string name="execute_jar_failed_to_read_file">Impossibile leggere il file .jar</string>
-    <string name="execute_jar_incompatible_runtime">La funzione Esegui .jar non è compatibile con Java %d</string>
     <string name="controller_button_select">Seleziona</string>
     <string name="controller_button_trigger_left">Grilletto sinistro</string>
     <string name="controller_button_trigger_right">Grilletto destro</string>

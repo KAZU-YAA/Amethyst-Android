@@ -5,8 +5,10 @@
 #include <unistd.h>
 
 #include "log.h"
-
 #include "utils.h"
+#include <androidnsbypass/nsbypass.h>
+#include "global_state.h"
+
 
 typedef int (*Main_Function_t)(int, char**);
 typedef void (*android_update_LD_LIBRARY_PATH_t)(char*);
@@ -59,6 +61,22 @@ jstring convertStringJVM(JNIEnv* srcEnv, JNIEnv* dstEnv, jstring srcStr) {
     return dstStr;
 }
 
+jintArray convertIntArrayJVM(JNIEnv* srcEnv, JNIEnv* dstEnv, jintArray srcIntArray) {
+	if (srcIntArray == NULL) {
+		return NULL;
+	}
+
+	jsize len = (*srcEnv)->GetArrayLength(srcEnv, srcIntArray);
+	jint* srcPtr = (*srcEnv)->GetIntArrayElements(srcEnv, srcIntArray, NULL);
+
+	jintArray dstIntArray = (*dstEnv)->NewIntArray(dstEnv, len);
+	(*dstEnv)->SetIntArrayRegion(dstEnv, dstIntArray, 0, len, srcPtr);
+
+	(*srcEnv)->ReleaseIntArrayElements(srcEnv, srcIntArray, srcPtr, JNI_ABORT);
+
+	return dstIntArray;
+}
+
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeSurfaceAWT(JNIEnv *env, jclass clazz, jlong surface) {
 	shared_awt_surface = surface;
 }
@@ -109,6 +127,12 @@ JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_dlopen(JNIEnv
 	void* handle = dlopen(nameUtf, RTLD_GLOBAL | RTLD_LAZY);
 	if (!handle) {
 		LOGE("dlopen %s failed: %s", nameUtf, dlerror());
+		// If fail, attempt to use escaped namespace. This gives us access to the symbols while
+		// still tricking android into loading private API libs :p
+
+        if(!linker_ns_dlopen(nameUtf, RTLD_GLOBAL | RTLD_LAZY, app_escapeNs)){
+			LOGE("escaped dlopen %s failed: %s", nameUtf, dlerror());
+		} else LOGW("escaped dlopen %s success. are you sure this was supposed to be escaped?", nameUtf);
 	} else {
 		LOGD("dlopen %s success", nameUtf);
 	}
@@ -184,3 +208,30 @@ JNIEXPORT jint JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_executeForkedBina
 }
 */
 
+// WARNING: This does not release the global ref, this can be a memory leak
+JNIEXPORT jstring JNICALL
+Java_net_kdt_pojavlaunch_Tools_jObjectToString(JNIEnv *env, jclass clazz, jobject object) {
+    if (object == NULL) {
+        return NULL;
+    }
+
+    jobject globalRef = (*env)->NewGlobalRef(env, object);
+    if (globalRef == NULL) {
+        return NULL;
+    }
+
+    char buf[32];
+    snprintf(buf, sizeof(buf), "%p", globalRef);
+
+    return (*env)->NewStringUTF(env, buf);
+}
+
+JNIEXPORT jlong JNICALL
+Java_net_kdt_pojavlaunch_Tools_getJavaVMPointer(JNIEnv *env, jclass clazz) {
+	JavaVM *vm;
+	if ((*env)->GetJavaVM(env, &vm) != JNI_OK) {
+		return -1;
+	}
+
+	return (jlong)(uintptr_t)vm;
+}

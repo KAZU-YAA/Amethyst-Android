@@ -53,8 +53,6 @@
     <string name="mcl_setting_veroption_snapshot">Snapshots</string>
     <string name="mcl_setting_veroption_oldalpha">Alphas</string>
     <string name="mcl_setting_veroption_oldbeta">Betas</string>
-    <string name="mcl_setting_java_sandbox">Ejecutar .jar en un Sandbox</string>
-    <string name="mcl_setting_java_sandbox_subtitle">Controla la disponibilidad del gestor de seguridad del sandbox al ejecutar un archivo jar.</string>
     <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
     <string name="global_edit">Editar</string>
@@ -332,7 +330,6 @@
     <string name="log_view_button_output_on">Salida\nEncendido</string>
     <string name="log_view_label_log_output">Salida del registro:</string>
     <string name="execute_jar_failed_to_read_file">Falló al leer el archivo .jar</string>
-    <string name="execute_jar_incompatible_runtime">La característica para ejecutar .jar no es compatible con Java %d</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>

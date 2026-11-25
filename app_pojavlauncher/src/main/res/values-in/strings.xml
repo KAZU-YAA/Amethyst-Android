@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">Amethyst</string>
+    <string name="app_name">Amethyst Microsoft-less Edition</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -59,8 +59,6 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha-lama</string>
     <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
-    <string name="mcl_setting_java_sandbox">Sandbox eksekusi .jar</string>
-    <string name="mcl_setting_java_sandbox_subtitle">Kendalikan ketersedian pengelola keamanan sandbox saat meluncurkan berkas .jar.</string>
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_edit">Ubah</string>
@@ -348,7 +346,6 @@
     <string name="log_view_button_output_on">Keluaran\nHIDUP</string>
     <string name="log_view_label_log_output">Keluaran log:</string>
     <string name="execute_jar_failed_to_read_file">Gagal membaca dokumen .jar</string>
-    <string name="execute_jar_incompatible_runtime">Fitur eksekusi .jar tidak kompatibel dengan Java %d</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>

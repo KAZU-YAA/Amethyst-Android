@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,6 +15,18 @@
         android:dropDownWidth="@dimen/_250sdp"
         android:dropDownVerticalOffset="@dimen/_52sdp"
 
+        app:layout_constraintTop_toTopOf="parent" />
+
+<ImageButton
+        android:id="@+id/github_button"
+        android:layout_width="@dimen/_52sdp"
+        android:layout_height="@dimen/_52sdp"
+        android:background="?attr/selectableItemBackground"
+        android:src="@drawable/ic_github"
+        android:scaleType="fitCenter"
+        android:paddingVertical="@dimen/_8sdp"
+
+        app:layout_constraintEnd_toStartOf="@+id/setting_button"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -37,15 +50,11 @@
         app:layout_constraintBottom_toTopOf="@+id/progress_layout"
         app:layout_constraintTop_toBottomOf="@+id/account_spinner" />
 
-
     <com.kdt.mcgui.ProgressLayout
         android:id="@+id/progress_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         app:layout_constraintBottom_toBottomOf="parent" />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

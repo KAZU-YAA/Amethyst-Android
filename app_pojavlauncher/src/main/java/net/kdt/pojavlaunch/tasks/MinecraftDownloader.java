@@ -86,7 +86,8 @@ public class MinecraftDownloader {
 
         sExecutorService.execute(() -> {
             try {
-                if(isLocalProfile || !isOnline) {
+                //if(isLocalProfile || !isOnline) {
+				if(!isOnline) { //ONLINE ACC BYPASS MODIFICATION
                     String versionMessage = realVersion; // Use provided version unless we find its a modded instance
 
                     // See if provided version is a modded version and if that version depends on another jar, check for presence of both jar's .json.
@@ -141,9 +142,7 @@ public class MinecraftDownloader {
         mDownloaderThreadException = new AtomicReference<>(null);
         mUseFileCounter = false;
 
-        if(!downloadAndProcessMetadata(activity, verInfo, versionName)) {
-            throw new RuntimeException(activity.getString(R.string.exception_failed_to_unpack_jre17));
-        }
+        downloadAndProcessMetadata(activity, verInfo, versionName);
 
         ArrayBlockingQueue<Runnable> taskQueue =
                 new ArrayBlockingQueue<>(mScheduledDownloadTasks.size(), false);
@@ -293,7 +292,7 @@ public class MinecraftDownloader {
         }
 
         if(activity != null && !NewJREUtil.installNewJreIfNeeded(activity, verInfo)){
-            return false;
+            throw new RuntimeException(activity.getString(R.string.exception_failed_to_unpack_jre17));
         }
 
         JAssets assets = downloadAssetsIndex(verInfo);

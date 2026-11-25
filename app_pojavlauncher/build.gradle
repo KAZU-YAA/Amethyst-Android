@@ -1,44 +1,42 @@
 plugins {
-    id 'com.android.application' version '8.7.2'
+    id 'com.android.application' version '9.3.1'
 }
 
 static def getDate() { return new Date().format('yyyyMMdd') }
 
 def getVersionName = {
     // Get the last version tag, as well as the short head of the last commit
-    ByteArrayOutputStream TAG = new ByteArrayOutputStream()
-    ByteArrayOutputStream BRANCH = new ByteArrayOutputStream()
+    String TAG = ""
+    String semVer = "1.1.7"
     // Used by the fallback for github actions
-    ByteArrayOutputStream TAG_PART_COMMIT = new ByteArrayOutputStream()
+    String TAG_PART_COMMIT = ""
     String TAG_STRING
 
-    exec {
-        try {
+    try {
+        TAG = providers.exec {
             commandLine 'git', 'describe', '--tags'
-            ignoreExitValue true
-            standardOutput = TAG
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            ignoreExitValue = true
+        }.getStandardOutput().asText.get()
+    } catch (Exception e) {
+        e.printStackTrace()
     }
 
-    if (TAG.toString() == "") {
-        exec {
-            // Fallback for action builds
-            try {
+    // Fallback for action builds
+    if (TAG.toString().trim().isEmpty()) {
+        try {
+            TAG_PART_COMMIT = providers.exec {
                 commandLine 'git', 'describe', '--always', '--tags'
-                ignoreExitValue true
-                standardOutput = TAG_PART_COMMIT
-            } catch (Exception e) {
-            }
+                ignoreExitValue = true
+            }.getStandardOutput().asText.get()
+        } catch (Exception ignored) {
         }
     }
 
 
-    if(TAG.toString() != ""){
-        TAG_STRING = TAG.toString()
+    if(!TAG.isBlank()){
+        TAG_STRING = TAG
     }else {
-        if(TAG_PART_COMMIT.toString().trim() == ""){
+        if(TAG_PART_COMMIT.isBlank()){
              //Fallback no repo
             return ("LOCAL-" + "${getDate()}")
         }else {
@@ -48,23 +46,18 @@ def getVersionName = {
 
     }
 
-    exec {
-        try {
-            commandLine 'git', 'branch', '--show-current'
-            ignoreExitValue true
-            standardOutput = BRANCH
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    def isRelease = project.gradle.startParameter.taskNames.any { it.toLowerCase().contains('release') }
+    if(!isRelease){
+        return TAG_STRING.trim().replace("-g", "-") + "-" + "debug-" + semVer
+    }else {
+        return TAG_STRING.trim().replace("-g", "-") + "-" + "release-" + semVer
     }
-
-    return TAG_STRING.trim().replace("-g", "-") + "-" + BRANCH.toString().trim()
 }
 
 def getCFApiKey = {
     String key = System.getenv("CURSEFORGE_API_KEY");
     if(key != null) return key;
-    File curseforgeKeyFile = new File("./curseforge_key.txt");
+    File curseforgeKeyFile = new File("$projectDir/curseforge_key.txt");
     if(curseforgeKeyFile.canRead() && curseforgeKeyFile.isFile()) {
         return curseforgeKeyFile.text;
     }
@@ -82,11 +75,8 @@ configurations {
 android {
     namespace 'net.kdt.pojavlaunch'
 
-    compileSdk = 34
+    compileSdk = 37
 
-    lintOptions {
-        abortOnError false
-    }
 
     signingConfigs {
         customDebug {
@@ -94,6 +84,12 @@ android {
             storePassword "android"
             keyAlias "androiddebugkey"
             keyPassword "android"
+        }
+        customRelease {
+            storeFile file("aamc_upload.jks")
+            storePassword System.getenv("GPLAY_KEYSTORE_PASSWORD")
+            keyAlias "android_github_release"
+            keyPassword System.getenv("GPLAY_KEYSTORE_PASSWORD")
         }
         googlePlayBuild {
             storeFile file("upload.jks")
@@ -126,6 +122,8 @@ android {
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.customDebug
+            resValue "string", "app_name", "Amethyst Microsoft-less Edition (Debug)"
+            resValue "string", "app_short_name", "Amethyst Microsoft-less (Debug)"
             resValue 'string', 'application_package', 'org.angelauramc.amethyst.debug'
             resValue 'string', 'storageProviderAuthorities', 'org.angelauramc.amethyst.scoped.gamefolder.debug'
             resValue 'string', 'shareProviderAuthority', 'org.angelauramc.amethyst.scoped.controlfolder.debug'
@@ -143,10 +141,13 @@ android {
         release {
             // Don't set to true or java.awt will be a.a or something similar.
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.customRelease
             // defaultConfig already set
             // multiDexEnabled = true
             // debuggable = true
+            resValue "string", "app_name", "Amethyst Microsoft-less Edition"
+            resValue "string", "app_short_name", "Amethyst Microsoft-less"
             resValue 'string', 'storageProviderAuthorities', 'org.angelauramc.amethyst.scoped.gamefolder'
             resValue 'string', 'application_package', 'org.angelauramc.amethyst'
         }
@@ -157,7 +158,7 @@ android {
         }
     }
 
-    ndkVersion = "25.2.9519653"
+    ndkVersion = "27.3.13750724"
 
     externalNativeBuild {
         ndkBuild {
@@ -179,11 +180,11 @@ android {
     packagingOptions {
         jniLibs {
             useLegacyPackaging = true
+            // If you're debugging mesa libs, put them here, android will strip them
+            // and not properly link to source files, very smart android studio.
+            keepDebugSymbols += ['**/libcutils.so']
+            pickFirsts += ['**/libbytehook.so']
         }
-        doNotStrip += [
-                "**/libcutils.so"
-        ]
-        pickFirst '**/libbytehook.so'
     }
 
     buildFeatures {
@@ -191,12 +192,27 @@ android {
         buildConfig true
     }
 
-    buildToolsVersion = '34.0.0'
+    lint {
+        abortOnError false
+    }
 }
 
 afterEvaluate {
-    // Explicit dependencies for which the apk relies on
-    tasks.mergeDebugAssets.dependsOn(":forge_installer:jar", ":arc_dns_injector:jar", ":lwjgl2_methods_injector:jar", ":jre_lwjgl3glfw:jar")
+    def componentJars = [
+            ":forge_installer:jar",
+            ":arc_dns_injector:jar",
+            ":MioLibPatcher:jar",
+            ":jre_lwjgl3glfw:jar"
+    ]
+
+    tasks.withType(com.android.build.gradle.tasks.MergeSourceSetFolders).configureEach { t ->
+        t.dependsOn(componentJars)
+    }
+
+    // Needed or else the release builds complain about undeclared dependencies
+    tasks.matching { it.name.toLowerCase().contains("lint") }.configureEach { t ->
+        t.dependsOn(componentJars)
+    }
 }
 
 dependencies {
@@ -225,7 +241,7 @@ dependencies {
     // Our version of exp4j can be built from source at
     // https://github.com/PojavLauncherTeam/exp4j
     implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.6.1'
-    implementation 'com.bytedance:bytehook:1.0.9'
+    implementation 'com.bytedance:bytehook:1.0.10'
 
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
 
@@ -233,5 +249,9 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
-    implementation project(":MobileGlues")
+    implementation "net.java.dev.jna:jna:5.14.0@aar"
+
+    implementation project(":androidnsbypass")
+
 }
+apply from: rootProject.file('gradle/prefab_bypass.gradle')

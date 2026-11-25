@@ -53,8 +53,6 @@
     <string name="mcl_setting_veroption_release">Versões finais</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha antiga</string>
     <string name="mcl_setting_veroption_oldbeta">Beta antiga</string>
-    <string name="mcl_setting_java_sandbox">Execução de .jar sandbox</string>
-    <string name="mcl_setting_java_sandbox_subtitle">Controla a disponibilidade do gerenciador de segurança do sandbox ao executar um arquivo .jar.</string>
     <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
     <string name="global_edit">Editar</string>
@@ -321,7 +319,6 @@
     <string name="log_view_button_output_on">SAÍDA\nLIGADA</string>
     <string name="log_view_label_log_output">Registro de saída:</string>
     <string name="execute_jar_failed_to_read_file">Falha na leitura do arquivo .jar</string>
-    <string name="execute_jar_incompatible_runtime">O recurso Executar .jar não é compatível com Java %d</string>
     <string name="controller_button_select">Selecionar</string>
     <string name="controller_button_trigger_left">Botão esquerdo</string>
     <string name="controller_button_trigger_right">Botão direito</string>

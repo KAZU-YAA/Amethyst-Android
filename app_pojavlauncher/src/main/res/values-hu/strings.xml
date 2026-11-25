@@ -62,8 +62,6 @@ mcl_indítás_letöltés_folyamatban"</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Régi-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Régi-béta</string>
-    <string name="mcl_setting_java_sandbox">Szabad .jar futtatása</string>
-    <string name="mcl_setting_java_sandbox_subtitle">Irányítja az elérhetőségét a szabad biztonság kezelőnek, mikőzben végrehajtasz egy .jar fájlt.</string>
     <string name="mcl_version_clone">Másolás</string>
     <!-- Global strings -->
     <string name="global_edit">Szerkesztés</string>
@@ -350,7 +348,6 @@ mcl_indítás_letöltés_folyamatban"</string>
     <string name="log_view_button_output_on">Kimenet\nBE</string>
     <string name="log_view_label_log_output">Napló kimenet:</string>
     <string name="execute_jar_failed_to_read_file">A .jar beolvasása sikertelen</string>
-    <string name="execute_jar_incompatible_runtime">A \".jar futtatása\" nem kompatibilis a Java %d-val/vel</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>

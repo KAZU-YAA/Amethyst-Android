@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">Amethyst</string>
+    <string name="app_name">Amethyst Microsoft-less Edition</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -58,8 +58,6 @@
     <string name="mcl_setting_veroption_snapshot">סנאפשוט</string>
     <string name="mcl_setting_veroption_oldalpha">אלפא: גרסה ישנה</string>
     <string name="mcl_setting_veroption_oldbeta">בטא: גרסה ישנה</string>
-    <string name="mcl_setting_java_sandbox">הפעלת .jar ב sandbox</string>
-    <string name="mcl_setting_java_sandbox_subtitle">\"שלוט בנגישות של מנהל האבטחה sandbox בעת הפעלת קובץ .jar.\".</string>
     <string name="mcl_version_clone">שכפול</string>
     <!-- Global strings -->
     <string name="global_edit">ערוך</string>
@@ -336,7 +334,6 @@
     <string name="log_view_button_output_on">פלט\nפעיל</string>
     <string name="log_view_label_log_output">לוג פלט:</string>
     <string name="execute_jar_failed_to_read_file">נכשלה קריאת קובץ ה-.jar</string>
-    <string name="execute_jar_incompatible_runtime">הפעלת .jar אינה תואמת ל-Java %d</string>
     <string name="controller_button_trigger_left">טריגר ימני</string>
     <string name="controller_button_trigger_right">טריגר שמאלי</string>
     <string name="controller_button_shoulder_left">Shoulder ימני</string>

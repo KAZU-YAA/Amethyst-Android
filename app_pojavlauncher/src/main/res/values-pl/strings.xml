@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">Amethyst</string>
+    <string name="app_name">Amethyst Microsoft-less Edition</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -59,8 +59,6 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Stara alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Stara beta</string>
-    <string name="mcl_setting_java_sandbox">Wykonanie pliku .jar w piaskownicy</string>
-    <string name="mcl_setting_java_sandbox_subtitle">Kontroluj dostępność menedżera zabezpieczeń piaskownicy podczas wykonywania pliku .jar.</string>
     <string name="mcl_version_clone">Utwórz kopię</string>
     <!-- Global strings -->
     <string name="global_edit">Edytuj</string>
@@ -350,7 +348,6 @@
     <string name="log_view_button_output_on">Wyjście\nWŁ.</string>
     <string name="log_view_label_log_output">Dane wyjściowe dziennika:</string>
     <string name="execute_jar_failed_to_read_file">Nie udało się odczytać pliku .jar</string>
-    <string name="execute_jar_incompatible_runtime">Funkcja uruchamiania plików .jar nie jest zgodna z Java %d</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>

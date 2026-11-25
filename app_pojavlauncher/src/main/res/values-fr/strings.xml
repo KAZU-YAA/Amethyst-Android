@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">Amethyst</string>
+    <string name="app_name">Amethyst Microsoft-less Edition</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -58,8 +58,6 @@
     <string name="mcl_setting_veroption_release">Version officielle</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Bêta</string>
-    <string name="mcl_setting_java_sandbox">Exécution de Sandbox .jar</string>
-    <string name="mcl_setting_java_sandbox_subtitle">Contrôler la disponibilité du gestionnaire de sécurité sandbox lors du lancement de l\'installateur .jar.</string>
     <string name="mcl_version_clone">Dupliquer</string>
     <!-- Global strings -->
     <string name="global_edit">Modifier</string>
@@ -341,7 +339,6 @@
     <string name="log_view_button_output_on">Sortie\nDésactivée</string>
     <string name="log_view_label_log_output">Sortie des logs :</string>
     <string name="execute_jar_failed_to_read_file">Impossible de lire le fichier .jar</string>
-    <string name="execute_jar_incompatible_runtime">La fonction \"Exécuter le fichier .jar\" n\'est pas compatible avec Java%d</string>
     <string name="controller_button_select">Sélectionner</string>
     <string name="controller_button_trigger_left">Gâchette gauche</string>
     <string name="controller_button_trigger_right">Gâchette droite</string>

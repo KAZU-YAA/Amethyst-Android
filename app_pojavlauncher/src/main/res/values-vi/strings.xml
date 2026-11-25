@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">Amethyst</string>
+    <string name="app_name">Amethyst Microsoft-less Edition</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -59,8 +59,6 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha cũ</string>
     <string name="mcl_setting_veroption_oldbeta">Beta cũ</string>
-    <string name="mcl_setting_java_sandbox">Chạy tệp .jar trong môi trường tách biệt</string>
-    <string name="mcl_setting_java_sandbox_subtitle">Bật hoặc tắt trình quản lý bảo mật môi trường tách biệt khi chạy tệp .jar.</string>
     <string name="mcl_version_clone">Tạo bản sao</string>
     <!-- Global strings -->
     <string name="global_edit">Sửa</string>
@@ -348,7 +346,6 @@
     <string name="log_view_button_output_on">In ra MH\nBật</string>
     <string name="log_view_label_log_output">Đầu ra nhật ký:</string>
     <string name="execute_jar_failed_to_read_file">Không thể đọc tệp .jar</string>
-    <string name="execute_jar_incompatible_runtime">Tính năng chạy tệp .jar không tương thích với Java %d</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>

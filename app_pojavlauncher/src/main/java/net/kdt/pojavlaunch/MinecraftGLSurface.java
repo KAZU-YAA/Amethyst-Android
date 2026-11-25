@@ -15,7 +15,6 @@ import android.graphics.SurfaceTexture;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Display;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -44,8 +43,10 @@ import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
 import net.kdt.pojavlaunch.utils.TouchControllerUtils;
 
+import org.libsdl.app.SDL;
 import org.libsdl.app.SDLActivity;
 import org.libsdl.app.SDLControllerManager;
+import org.libsdl.app.SDLSurface;
 import org.lwjgl.glfw.CallbackBridge;
 
 
@@ -84,6 +85,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
     final Object mSurfaceReadyListenerLock = new Object();
     /* View holding the surface, either a SurfaceView or a TextureView */
     View mSurface;
+    Surface mNativeSurface;
     String TAG = "MinecraftGLSurface";
 
     private final InGameEventProcessor mIngameProcessor = new InGameEventProcessor(mSensitivityFactor);
@@ -102,13 +104,22 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
         super(context, attributeSet);
         setFocusable(true);
         CallbackBridge.setDirectGamepadEnableHandler(this);
-        SDLControllerManager.setDirectGamepadEnableHandler(this);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setUpPointerCapture(AbstractTouchpad touchpad) {
         if(mPointerCapture != null) mPointerCapture.detach();
         mPointerCapture = new AndroidPointerCapture(touchpad, this);
+    }
+    protected static View.OnGenericMotionListener motionListener = (v, event) -> false;
+    private static void setupSDL(Context ctx, Surface nativeSurface, ViewGroup layout){
+        SDLSurface surface = new SDLSurface(ctx);
+        motionListener = SDLActivity.getMotionListener();
+        // Sets up the Java side, must be done here or else it might run on a non-looper thread
+        // which crashes the SDLCommandHandler
+        org.libsdl.app.SDL.initialize();
+        SDL.setContext((MainActivity) ctx);
+        SDLActivity.externalInitialize(surface, layout, nativeSurface);
     }
 
     /** Initialize the view and all its settings
@@ -121,33 +132,53 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
         if(Tools.isAndroid8OrHigher()) setUpPointerCapture(touchpad);
         mInGUIProcessor.setAbstractTouchpad(touchpad);
         // Kopper Zink has orientation issues on SurfaceView
+        // Angelica has some rendering issues if you tab out on SurfaceView in LWJGL3ify 2.x
+        // FIXME: LWJGL3ify 3.x does not like when surface randomly dies on SurfaceView
+        // (it doesnt swap to 1x1 pbuffer cause it uses sdl for swap instead of glfw)
         try {
-            useSurfaceView = useSurfaceView && !LOCAL_RENDERER.equals("opengles3_desktopgl_zink_kopper");
+            useSurfaceView = useSurfaceView && !LOCAL_RENDERER.equals("opengles3_desktopgl_zink_kopper") &&
+                    !Tools.hasMods("angelica") &&
+                    !Tools.hasMods("lwjgl3ify-3");
         } catch (NullPointerException ignored){}
         if(useSurfaceView){
             SurfaceView surfaceView = new SurfaceView(getContext());
             mSurface = surfaceView;
-
+            mNativeSurface = surfaceView.getHolder().getSurface();
+            setupSDL(getContext(), mNativeSurface, (ViewGroup) getParent());
             surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
                 private boolean isCalled = isAlreadyRunning;
                 @Override
                 public void surfaceCreated(@NonNull SurfaceHolder holder) {
                     if(isCalled) {
-                        JREUtils.setupBridgeWindow(surfaceView.getHolder().getSurface());
+                        JREUtils.setupBridgeWindow(mNativeSurface);
+                        if (sdlEnabled) SDLSurface.setNativeSurface(mNativeSurface);
+                        refreshSize(true);
                         return;
                     }
                     isCalled = true;
 
-                    realStart(surfaceView.getHolder().getSurface());
+                    realStart(mNativeSurface);
                 }
 
                 @Override
                 public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
+                    // Don't use the scaled resolution, SDL doesn't work like that, it'll render offscreen instead.
+                    // The first two args go unused, you can put any garbage in em.
+                    if (sdlEnabled) SDLActivity.getSDLSurface().surfaceChanged(holder, format, Tools.currentDisplayMetrics.widthPixels, Tools.currentDisplayMetrics.heightPixels);
                     refreshSize();
                 }
 
                 @Override
-                public void surfaceDestroyed(@NonNull SurfaceHolder holder) {}
+                public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
+                    /*
+                    Surface recreation in SurfaceView happens very often. When tabbing back in from
+                    out, when minimizing floating window, when turning into floating window, etc.
+                    Whenever the surface isn't in view, it is destroyed. When going into floating
+                    window, it appears to automatically release the associated ANativeWindow. This
+                    can cause a crash if not handled.
+                     */
+                    if (sdlEnabled) SDLActivity.getSDLSurface().surfaceDestroyed(holder);
+                }
             });
 
             ((ViewGroup)getParent()).addView(surfaceView);
@@ -161,28 +192,41 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
                 private boolean isCalled = isAlreadyRunning;
                 @Override
                 public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
-                    Surface tSurface = new Surface(surface);
+                    mNativeSurface = new Surface(surface);
+                    setupSDL(getContext(), mNativeSurface, (ViewGroup) getParent());
                     if(isCalled) {
-                        JREUtils.setupBridgeWindow(tSurface);
+                        JREUtils.setupBridgeWindow(mNativeSurface);
+                        if (sdlEnabled) SDLSurface.setNativeSurface(mNativeSurface);
                         return;
                     }
                     isCalled = true;
 
-                    realStart(tSurface);
+                    realStart(mNativeSurface);
                 }
 
                 @Override
                 public void onSurfaceTextureSizeChanged(@NonNull SurfaceTexture surface, int width, int height) {
+                    // Don't use the scaled resolution, SDL doesn't work like that, it'll render offscreen instead.
+                    // The first two args go unused, you can put any garbage in em.
+                    if (sdlEnabled) SDLActivity.getSDLSurface().surfaceChanged(null, 0, Tools.currentDisplayMetrics.widthPixels, Tools.currentDisplayMetrics.heightPixels);
                     refreshSize();
                 }
 
                 @Override
                 public boolean onSurfaceTextureDestroyed(@NonNull SurfaceTexture surface) {
+                    /*
+                    Surface recreation in TextureView can only really happen once, when turning
+                    into a floating window. Subsequent turns to floating window no longer trigger
+                    recreation. Tabbing out and in does not trigger recreation.
+                     */
+                    if (sdlEnabled) SDLActivity.getSDLSurface().surfaceDestroyed(null);
                     return true;
                 }
 
                 @Override
-                public void onSurfaceTextureUpdated(@NonNull SurfaceTexture surface) {}
+                public void onSurfaceTextureUpdated(@NonNull SurfaceTexture surface) {
+                    // TODO: Triggers on eglSwapBuffers. Add a loading message and make it end here
+                }
             });
 
             ((ViewGroup)getParent()).addView(textureView);
@@ -230,11 +274,11 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
     }
 
     private void createGamepad(View contextView, InputDevice inputDevice) {
-        if(CallbackBridge.sGamepadDirectInput && !sdlEnabled) {
+        if (CallbackBridge.sGamepadDirectInput) {
             mGamepadHandler = new DirectGamepad();
-        }else if(!sdlEnabled) {
+        } else if (!CallbackBridge.sdlControllerActive) {
             mGamepadHandler = new Gamepad(contextView, inputDevice, DefaultDataProvider.INSTANCE, true);
-        }else mGamepadHandler = (code, value) -> {}; // Ensure it isn't null while also not processing the events.
+        } else mGamepadHandler = (i, v) -> {};
     }
 
     /**
@@ -247,18 +291,17 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
             final MotionEvent copy = MotionEvent.obtain(event);
             PojavApplication.sExecutorService.execute(()->{
                 try {
-                    MainActivity.motionListener.onGenericMotion(this, copy);
+                    motionListener.onGenericMotion(this, copy);
                     copy.recycle();
                 } catch (Throwable ignored) {
                     Log.e(TAG, "SDL failed to send motionevent!");
                 }
             });
-            return true;
         }
         super.dispatchGenericMotionEvent(event);
         int mouseCursorIndex = -1;
 
-        if(!sdlEnabled && Gamepad.isGamepadEvent(event)){
+        if(Gamepad.isGamepadEvent(event)){
             if(mGamepadHandler == null) createGamepad(this, event.getDevice());
 
             mInputManager.handleMotionEventInput(getContext(), event, mGamepadHandler);
@@ -323,9 +366,11 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
         if(event.getDevice() != null
                 && ( (event.getSource() & InputDevice.SOURCE_MOUSE_RELATIVE) == InputDevice.SOURCE_MOUSE_RELATIVE
                 ||   (event.getSource() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE)  ){
-
             if(eventKeycode == KeyEvent.KEYCODE_BACK){
-                sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_RIGHT, event.getAction() == KeyEvent.ACTION_DOWN);
+                sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_4, event.getAction() == KeyEvent.ACTION_DOWN);
+                return true;
+            }else if(eventKeycode == KeyEvent.KEYCODE_FORWARD){
+                sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_5, event.getAction() == KeyEvent.ACTION_DOWN);
                 return true;
             }
         }
@@ -341,9 +386,8 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
                     Log.e(TAG, "SDL failed to send keyevent!");
                 }
             });
-            return true;
         }
-        if(!sdlEnabled && isGamepadEvent){
+        if(isGamepadEvent){
             if(mGamepadHandler == null) createGamepad(this, event.getDevice());
 
             mInputManager.handleKeyEventInput(getContext(), event, mGamepadHandler);
@@ -375,6 +419,12 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
             case MotionEvent.BUTTON_SECONDARY:
                 glfwButton = LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_RIGHT;
                 break;
+            case MotionEvent.BUTTON_BACK:
+                glfwButton = LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_4;
+                break;
+            case MotionEvent.BUTTON_FORWARD:
+                glfwButton = LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_5;
+                break;
         }
         if(glfwButton == -256) return false;
         sendMouseButton(glfwButton, status);
@@ -392,11 +442,13 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
             post(this::refreshSize);
             return;
         }
+        int newWidth;
+        int newHeight;
         // Use the width and height of the View instead of display dimensions to avoid
         // getting squiched/stretched due to inconsistencies between the layout and
         // screen dimensions.
-        int newWidth = Tools.getDisplayFriendlyRes(getWidth(), LauncherPreferences.PREF_SCALE_FACTOR);
-        int newHeight = Tools.getDisplayFriendlyRes(getHeight(), LauncherPreferences.PREF_SCALE_FACTOR);
+        newWidth = Tools.getDisplayFriendlyRes(getWidth(), LauncherPreferences.PREF_SCALE_FACTOR);
+        newHeight = Tools.getDisplayFriendlyRes(getHeight(), LauncherPreferences.PREF_SCALE_FACTOR);
         if (newHeight < 1 || newWidth < 1) {
             Log.e("MGLSurface", String.format("Impossible resolution : %dx%d", newWidth, newHeight));
             return;
@@ -418,9 +470,9 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
                 view.getSurfaceTexture().setDefaultBufferSize(windowWidth, windowHeight);
             }
         }
+        if (sdlEnabled) SDLActivity.getSDLSurface().nativeResize(windowWidth, windowHeight);
 
         CallbackBridge.sendUpdateWindowSize(windowWidth, windowHeight);
-
     }
 
     private void realStart(Surface surface){
@@ -469,9 +521,10 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
     }
 
     private void updateGrabState(boolean isGrabbing) {
-        if(mLastGrabState != isGrabbing) {
+        TouchEventProcessor desiredProcessor = pickEventProcessor(isGrabbing);
+        if (mLastGrabState != isGrabbing || mCurrentTouchProcessor != desiredProcessor) {
             mCurrentTouchProcessor.cancelPendingActions();
-            mCurrentTouchProcessor = pickEventProcessor(isGrabbing);
+            mCurrentTouchProcessor = desiredProcessor;
             mLastGrabState = isGrabbing;
         }
     }

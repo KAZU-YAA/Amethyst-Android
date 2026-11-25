@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">Amethyst</string>
+    <string name="app_name">Amethyst Microsoft-less Edition</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -58,8 +58,6 @@
     <string name="mcl_setting_veroption_snapshot">Снапшоты</string>
     <string name="mcl_setting_veroption_oldalpha">Старые альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Старые бета</string>
-    <string name="mcl_setting_java_sandbox">Безопасное выполнение .jar</string>
-    <string name="mcl_setting_java_sandbox_subtitle">Управляет доступностью менеджера безопасной среды Java при выполнении .jar-файла.</string>
     <string name="mcl_version_clone">Копировать</string>
     <!-- Global strings -->
     <string name="global_edit">Редактировать</string>
@@ -345,7 +343,6 @@
     <string name="log_view_button_output_on">Вывод\nВКЛ</string>
     <string name="log_view_label_log_output">Журнал:</string>
     <string name="execute_jar_failed_to_read_file">Ошибка чтения .jar файла</string>
-    <string name="execute_jar_incompatible_runtime">Функция запуска .jar файлов несовместима с Java %d</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>

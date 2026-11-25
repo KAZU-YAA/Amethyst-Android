@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">Amethyst</string>
+    <string name="app_name">Amethyst Microsoft-less Edition</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -59,8 +59,6 @@
     <string name="mcl_setting_veroption_snapshot">스냅숏</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
-    <string name="mcl_setting_java_sandbox">외부 .jar 실행</string>
-    <string name="mcl_setting_java_sandbox_subtitle">.jar 파일을 실행할 때 샌드박스 보안 관리자의 사용 가능 여부를 제어합니다.</string>
     <string name="mcl_version_clone">복제</string>
     <!-- Global strings -->
     <string name="global_edit">수정</string>
@@ -345,7 +343,6 @@
     <string name="log_view_button_output_on">출력\n켬</string>
     <string name="log_view_label_log_output">로그 출력:</string>
     <string name="execute_jar_failed_to_read_file">.jar 파일을 읽지 못했습니다</string>
-    <string name="execute_jar_incompatible_runtime">Java %d는 .jar 실행 기능과 호환되지 않습니다</string>
     <string name="controller_button_select">선택</string>
     <string name="controller_button_trigger_left">좌측 트리거</string>
     <string name="controller_button_trigger_right">우측 트리거</string>

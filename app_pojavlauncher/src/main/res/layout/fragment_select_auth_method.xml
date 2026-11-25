@@ -43,7 +43,7 @@
         android:id="@+id/button_local_authentication"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Local account"
+        android:text="Local account (100% Microsoft-less)"
         android:textSize="@dimen/_12ssp"
         android:layout_marginHorizontal="@dimen/_25sdp"
         app:layout_constraintBottom_toBottomOf="@id/login_menu"

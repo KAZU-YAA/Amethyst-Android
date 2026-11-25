@@ -54,8 +54,6 @@
     <string name="mcl_setting_veroption_snapshot">اللمحات (سنابشوت)</string>
     <string name="mcl_setting_veroption_oldalpha">نسخ ألفا قديمة</string>
     <string name="mcl_setting_veroption_oldbeta">نسخ بيتا قديمة</string>
-    <string name="mcl_setting_java_sandbox">تنفيذ ملف \".jar\" داخل Sandbox</string>
-    <string name="mcl_setting_java_sandbox_subtitle">التحكم بقدرة وجود Sandbox Security Manger عند تشغيل مِلَفّ .jar.</string>
     <string name="mcl_version_clone">نسخ</string>
     <!-- Global strings -->
     <string name="global_edit">تعديل</string>
@@ -318,7 +316,6 @@
     <string name="log_view_button_output_on">المخرجات\nمفعلة</string>
     <string name="log_view_label_log_output">سِجل الإخراج:</string>
     <string name="execute_jar_failed_to_read_file">فشل في قراءة ملف .jar</string>
-    <string name="execute_jar_incompatible_runtime">تنفيذ وظيفة .jar غير متوافق مع Java %d</string>
     <string name="controller_button_select">اختر</string>
     <string name="controller_button_trigger_left">الزناد الأيسر</string>
     <string name="controller_button_trigger_right">الزناد الأيمن</string>
